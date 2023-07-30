@@ -42,7 +42,9 @@ const Login = () => {
     }
 
     if (!result) {
-      toast.warning(errorMessage);
+      toast.warning(errorMessage, {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
 
     return result;
