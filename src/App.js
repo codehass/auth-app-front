@@ -11,7 +11,7 @@ const App = () => {
     <div className="app">
       <ToastContainer theme="colored" />
       <BrowserRouter>
-        <div>
+        <div className="form-container">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
