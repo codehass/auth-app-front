@@ -1,17 +1,42 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [userName, SetUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin(e) {
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
     e.preventDefault();
-    console.log("Login");
-  }
+    if (validate()) {
+      toast.success("Registered successfully");
+      navigate("/");
+    }
+  };
+
+  const validate = () => {
+    let result = true;
+    let errorMessage = "Please enter the value in ";
+    if (userName === "" || userName === null) {
+      result = false;
+      errorMessage += " Username";
+    }
+    if (password === "" || password === null) {
+      result = false;
+      errorMessage += " Password";
+    }
+
+    if (!result) {
+      toast.warning(errorMessage);
+    }
+
+    return result;
+  };
 
   return (
-    <form onClick={handleLogin}>
+    <form onSubmit={handleLogin}>
       <h2>Login </h2>
       <div>
         <div>
