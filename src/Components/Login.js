@@ -1,43 +1,31 @@
+// Login.js
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../assets/register.css";
 
 const Login = () => {
-  const [userName, SetUserName] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
-  const fakeAPICall = (data) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const token = "fake-jwt-token";
-
-        resolve(token);
-      }, 1000);
-    });
-  };
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (validate()) {
-      fakeAPICall({
-        username: userName,
-        password: password,
-      })
-        .then((token) => {
-          localStorage.setItem("jwtToken", token);
-          toast.success("Login successful!", {
-            position: toast.POSITION.TOP_CENTER,
-          });
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log("Error during login:", error);
-          toast.error("Invalid credentials. Please try again.", {
-            position: toast.POSITION.TOP_CENTER,
-          });
+      const storedUsername = localStorage.getItem("username");
+      const storedPassword = localStorage.getItem("password");
+
+      if (userName === storedUsername && password === storedPassword) {
+        toast.success("Login successful!", {
+          position: toast.POSITION.TOP_CENTER,
         });
+        navigate("/");
+      } else {
+        toast.error("Invalid credentials. Please try again.", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
     }
   };
 
@@ -61,20 +49,20 @@ const Login = () => {
   };
 
   return (
-    <form class="register" onSubmit={handleLogin}>
+    <form className="register" onSubmit={handleLogin}>
       <h2 className="form-title">Login </h2>
       <div>
-        <div class="group-input">
+        <div className="group-input">
           <label>User Name</label>
           <input
             type="text"
             placeholder="Username"
             value={userName}
-            onChange={(e) => SetUserName(e.target.value)}
+            onChange={(e) => setUserName(e.target.value)}
             className="input"
           />
         </div>
-        <div class="group-input">
+        <div className="group-input">
           <label>Password</label>
           <input
             type="password"
@@ -90,7 +78,7 @@ const Login = () => {
       </button>
 
       <div className="link">
-        <p class="signup-link"> No account?</p>
+        <p className="signup-link"> No account?</p>
         <Link to="/register">Register</Link>
       </div>
     </form>
