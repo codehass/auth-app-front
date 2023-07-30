@@ -12,7 +12,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const fakeAPICall = (data) => {
+  const fakeAPICall = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
         const token = uuidv4();
@@ -37,6 +37,8 @@ const Register = () => {
       })
         .then((token) => {
           localStorage.setItem("jwtToken", token);
+          localStorage.setItem("username", userName);
+          localStorage.setItem("password", password);
           navigate("/login");
         })
         .catch((error) => {
