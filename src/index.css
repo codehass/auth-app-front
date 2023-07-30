@@ -12,14 +12,47 @@ code {
     monospace;
 }
 
+.navbar {
+  background-color: #fff;
+  width: 100%;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .app {
   background-color: #e8e8e8;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .form-container {
-  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.navbar h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
 }
